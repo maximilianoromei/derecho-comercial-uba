@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elementos de Derecho Comercial — Cátedra Favier Dubois & Araldi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:         #003087;
+    --azul-vivo:    #0050C8;
+    --azul-suave:   #E8EEF8;
+    --azul-deep:    #001A4D;
+    --azul-medio:   #4A6FA5;
+    --blanco:       #FFFFFF;
+    --gris-claro:   #F5F6F9;
+    --gris-medio:   #6B7A99;
+    --gris-oscuro:  #1A1F2E;
+    --borde:        #D4DCF0;
+    --dorado:       #C9A84C;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--gris-claro);
+    color: var(--gris-oscuro);
+    min-height: 100vh;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: var(--azul-deep);
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 7px 20px;
+  }
+  .topbar strong { color: var(--dorado); }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: var(--blanco);
+    border-bottom: 3px solid var(--azul);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,48,135,0.10);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--azul);
+    line-height: 1.2;
+  }
+  .nav-logo span { display: block; font-size: 11px; font-weight: 400; color: var(--gris-medio); font-family: 'Outfit', sans-serif; letter-spacing: 0.05em; }
+
+  .nav-links { display: flex; gap: 4px; }
+
+  .nav-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--gris-medio);
+    transition: background .2s, color .2s;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .nav-btn:hover { background: var(--azul-suave); color: var(--azul); }
+
+  .nav-btn.active {
+    background: var(--azul);
+    color: var(--blanco);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 35%;
+    filter: brightness(0.35) saturate(0.6);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,26,77,0.7) 0%, rgba(0,48,135,0.4) 50%, transparent 100%);
+  }
+
+  /* Decorative diagonal stripe */
+  .hero-stripe {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--gris-claro);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px 56px;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 10px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 900; color: var(--blanco);
+    line-height: 1.05; max-width: 650px;
+  }
+
+  .hero-meta {
+    margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .hero-meta span {
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hero-meta span::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--dorado); display: inline-block;
+  }
+
+  /* ── ACCENT BAR ── */
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--azul-deep) 0%, var(--azul-vivo) 50%, var(--azul-suave) 100%);
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 56px 40px 80px; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 52px; animation: fadeUp 0.45s ease both; }
+  .section:nth-child(1){animation-delay:.05s} .section:nth-child(2){animation-delay:.1s}
+  .section:nth-child(3){animation-delay:.15s} .section:nth-child(4){animation-delay:.2s}
+  .section:nth-child(5){animation-delay:.25s} .section:nth-child(6){animation-delay:.3s}
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--borde);
+  }
+
+  .section-number {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--azul); color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 700; color: var(--gris-oscuro);
+  }
+  .section-subtitle {
+    font-size: 11px; color: var(--gris-medio); margin-top: 2px;
+    letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+  }
+
+  /* ── CARDS ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 13px; }
+
+  .card {
+    background: var(--blanco); border: 1px solid var(--borde);
+    border-radius: 10px; padding: 16px 18px;
+    text-decoration: none; color: inherit;
+    display: flex; align-items: flex-start; gap: 13px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+    position: relative; overflow: hidden;
+  }
+  .card::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--azul-vivo);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform .2s; border-radius: 3px 0 0 3px;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,48,135,.12); border-color: var(--borde); }
+  .card:hover::after { transform: scaleY(1); }
+  .card-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .card-title { font-size: 13.5px; font-weight: 600; color: var(--gris-oscuro); line-height: 1.35; margin-bottom: 3px; }
+  .card-desc { font-size: 11.5px; color: var(--gris-medio); line-height: 1.5; }
+  .card-tag {
+    display: inline-block; margin-top: 7px; font-size: 10px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px;
+  }
+  .card-tag.ppt { background: #FFF3E0; color: #E65100; }
+  .card-tag.pdf { background: #FDE8D8; color: #B5400A; }
+  .card-tag.doc { background: #E8F4FD; color: #1A6EA8; }
+  .card-tag.ej  { background: #E8F5E9; color: #2E7D32; }
+  .card-tag.yt  { background: #FFECEC; color: #C0392B; }
+  .card-tag.xls { background: #E8F5E9; color: #1B5E20; }
+
+  /* ── LIST CARDS ── */
+  .list-cards { display: flex; flex-direction: column; gap: 8px; }
+  .list-card {
+    background: var(--blanco); border: 1px solid var(--borde);
+    border-radius: 8px; padding: 12px 16px;
+    text-decoration: none; color: inherit;
+    display: flex; align-items: center; gap: 12px;
+    transition: transform .2s, box-shadow .2s; position: relative; overflow: hidden;
+  }
+  .list-card::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--azul-vivo);
+    transform: scaleY(0); transform-origin: bottom; transition: transform .2s;
+  }
+  .list-card:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,48,135,.09); }
+  .list-card:hover::after { transform: scaleY(1); }
+  .list-card-icon { font-size: 16px; flex-shrink: 0; }
+  .list-card-title { font-size: 13px; font-weight: 500; flex: 1; }
+  .list-card-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px; background: var(--azul-suave); color: var(--azul); white-space: nowrap;
+  }
+
+  /* ── EVALUACIONES ── */
+  .eval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media(max-width:700px){ .eval-grid { grid-template-columns: 1fr; } }
+
+  .eval-card {
+    background: var(--blanco); border: 1px solid var(--borde);
+    border-radius: 12px; overflow: hidden;
+  }
+
+  .eval-card-header {
+    background: var(--azul); color: white;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eval-card-header .icon { font-size: 20px; }
+  .eval-card-header .title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; }
+  .eval-card-header .subtitle { font-size: 11px; opacity: 0.75; margin-top: 1px; }
+
+  .eval-card-body { padding: 16px 20px; }
+
+  .eval-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid var(--borde); gap: 12px;
+  }
+  .eval-row:last-child { border-bottom: none; }
+  .eval-row-label { font-size: 13px; font-weight: 500; color: var(--gris-oscuro); }
+  .eval-row-meta { font-size: 11.5px; color: var(--gris-medio); margin-top: 2px; }
+  .eval-row-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+  .badge-fecha {
+    background: var(--azul-suave); color: var(--azul);
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  }
+  .badge-link {
+    background: var(--azul); color: white;
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+    text-decoration: none; transition: background .2s;
+  }
+  .badge-link:hover { background: var(--azul-vivo); }
+  .badge-pendiente {
+    background: #FFF8E1; color: #F57F17;
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* ── COMING SOON ── */
+  .coming-soon {
+    text-align: center; padding: 80px 40px;
+    animation: fadeUp .4s ease both;
+  }
+  .coming-soon .icon { font-size: 56px; margin-bottom: 20px; }
+  .coming-soon h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 700; color: var(--azul); margin-bottom: 10px;
+  }
+  .coming-soon p { font-size: 15px; color: var(--gris-medio); max-width: 400px; margin: 0 auto; }
+
+  /* ── PARTE INTRO BANNER ── */
+  .parte-banner {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-vivo) 100%);
+    border-radius: 12px; padding: 24px 28px; margin-bottom: 36px;
+    display: flex; align-items: center; gap: 20px;
+    animation: fadeUp .35s ease both;
+  }
+  .parte-banner-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 900; color: rgba(255,255,255,0.18);
+    line-height: 1; flex-shrink: 0;
+  }
+  .parte-banner-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 700; color: white; margin-bottom: 4px;
+  }
+  .parte-banner-text p { font-size: 13px; color: rgba(255,255,255,0.75); }
+
+  /* ── TYPE GROUPS ── */
+  .type-group { margin-bottom: 20px; }
+  .type-group:last-child { margin-bottom: 0; }
+
+  .type-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gris-medio);
+    margin-bottom: 10px; padding-bottom: 6px;
+    border-bottom: 1px dashed var(--borde);
+  }
+  .type-label-icon { font-size: 13px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--azul-deep); color: rgba(255,255,255,0.45);
+    text-align: center; font-size: 12px; padding: 22px 40px;
+  }
+  footer strong { color: var(--dorado); }
+
+  @media(max-width:640px){
+    .hero-content { padding: 0 22px 44px; }
+    .container { padding: 36px 18px 60px; }
+    .cards { grid-template-columns: 1fr; }
+    .nav-inner { padding: 0 16px; }
+    .nav-logo span { display: none; }
+    .nav-btn { padding: 7px 10px; font-size: 12px; }
+    .topbar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <strong>UBA · Facultad de Derecho</strong> &nbsp;·&nbsp; Elementos de Derecho Comercial &nbsp;·&nbsp; Primer Cuatrimestre 2026
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      Elementos de Derecho Comercial
+      <span>Cátedra Favier Dubois &amp; Araldi · UBA Derecho</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('parte1', this)">Parte 1</button>
+      <button class="nav-btn" onclick="showPage('parte2', this)">Parte 2</button>
+      <button class="nav-btn" onclick="showPage('parte3', this)">Parte 3</button>
+      <button class="nav-btn" onclick="showPage('evaluaciones', this)">Evaluaciones</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/UBA_law_school.jpg/1280px-UBA_law_school.jpg"
+       alt="Facultad de Derecho UBA"
+       onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/ninf/UBA_logo.svg/800px-UBA_logo.svg.png'">
+  <div class="hero-overlay"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">UBA · Facultad de Derecho · Primer Cuatrimestre 2026</p>
+    <h1>Elementos de<br>Derecho Comercial</h1>
+    <div class="hero-meta">
+      <span>Cátedra Favier Dubois &amp; Araldi</span>
+      <span>Materiales de estudio</span>
+      <span>2026</span>
+    </div>
+  </div>
+</div>
+<div class="accent-bar"></div>
+
+<!-- ═══════════════════════════════════════ PARTE 1 ═══ -->
+<div id="parte1" class="page active">
+  <div class="container">
+
+    <div class="parte-banner">
+      <div class="parte-banner-num">I</div>
+      <div class="parte-banner-text">
+        <h2>Primera Parte</h2>
+        <p>Introducción al derecho comercial · Empresa · Fondo de comercio · Libros de comercio · Sociedades comerciales</p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: HISTORIA Y ETAPAS -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div>
+          <div class="section-title">Historia y Etapas del Derecho Comercial</div>
+          <div class="section-subtitle">Evolución histórica · Corporaciones medievales · Codificación · Doctrina Vitolo</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://view.genially.com/65f1379d67c132001479c8af/learning-experience-didactic-unit-etapas-del-derecho-comercial" target="_blank" class="card">
+            <span class="card-icon">🕐</span>
+            <div>
+              <div class="card-title">Etapas del Derecho Comercial</div>
+              <div class="card-desc">Recorrido interactivo por la evolución histórica del derecho mercantil desde la Edad Media hasta el CCyCN.</div>
+              <span class="card-tag ppt">Genially</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📖</span>Doctrina y bibliografía</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/130tBwLPk5Wpiz3339xDpWCfMVrK4yyFt/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Texto del Dr. Vitolo</div>
+              <div class="card-desc">Desarrollo doctrinal sobre las etapas históricas del derecho comercial argentino y comparado.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">🗺️</span>Infografías</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/1hmxQAh4q6Z7eb4yX_gmH6r9XYkp8pbr6/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">🗺️</span>
+            <div>
+              <div class="card-title">Corporaciones medievales</div>
+              <div class="card-desc">Resumen visual de las corporaciones y gremios medievales como antecedente del derecho comercial.</div>
+              <span class="card-tag pdf">Infografía</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/file/d/1cZnV80MevjwsOGC0nxb5Xb08v4Ia1YDo/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">🗺️</span>
+            <div>
+              <div class="card-title">Resumen primera clase</div>
+              <div class="card-desc">Síntesis visual de los contenidos de la primera clase. Ideal para repasar antes del parcial.</div>
+              <span class="card-tag pdf">Infografía</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: EMPRESA -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div>
+          <div class="section-title">La Empresa</div>
+          <div class="section-subtitle">Concepto · Empresa familiar · Configuraciones estructurales</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://docs.google.com/presentation/d/1bD5LRt3CgtW_qn7SHL2TgfEpQUht6NOC/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Empresa</div>
+              <div class="card-desc">Concepto de empresa en el CCyCN. Teorías. El empresario. Elementos constitutivos del establecimiento.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/1OX-UldxzczUXa9p5btIF4IALuNDHxLQiYSpxDfbi2JM/edit?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Empresa Familiar</div>
+              <div class="card-desc">Concepto, características y problemática jurídica de la empresa de familia. Protocolo familiar.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📄</span>Material de lectura</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/1XV_xTUTmjxxivz_IzPEvccgqzo2KbcYk/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Configuraciones estructurales</div>
+              <div class="card-desc">Las distintas formas de organización estructural de la empresa. Lectura complementaria.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: FONDO DE COMERCIO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div>
+          <div class="section-title">Fondo de Comercio</div>
+          <div class="section-subtitle">Ley 11.867 · Transferencia · Elementos constitutivos</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://docs.google.com/presentation/d/1JdTGtHHTcuLDOnaXvnUEIxZ7ydGv7MuV/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Fondo de Comercio</div>
+              <div class="card-desc">Concepto y elementos del fondo de comercio. Ley 11.867: procedimiento, publicidad y oponibilidad.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📖</span>Doctrina y bibliografía</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/1PezGHQ_CRM0gNzEP4sO6DjYfJ_Q2geBN/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Texto Dr. Vitolo — Fondo de Comercio</div>
+              <div class="card-desc">Desarrollo doctrinal sobre el fondo de comercio y su régimen de transferencia.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: INFORMACIÓN Y CONTABILIDAD -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div>
+          <div class="section-title">Información y Contabilidad Mercantil</div>
+          <div class="section-subtitle">Arts. 320 y ss. CCyCN · Estados financieros · Análisis contable</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://docs.google.com/presentation/d/1XqR6nfGbEPWuvFLFXTtE3mAIcqnFhCSN/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Información y Contabilidad</div>
+              <div class="card-desc">Obligación de llevar contabilidad. Libros indispensables y auxiliares. Arts. 320-331 CCyCN.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/101IUKIU97MTVodhwqJBLAFeMowUFfflWpOnpG-7jWUs/edit?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Conceptos Generales de Contabilidad</div>
+              <div class="card-desc">Conceptos contables fundamentales orientados al estudiante de derecho.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/1E-zI9L_PornnvH2XXqfYVPPDb6azLab7/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Análisis de Estados Contables</div>
+              <div class="card-desc">Lectura e interpretación de balances y estados de resultados. Ratios e indicadores básicos.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">⚖️</span>Jurisprudencia</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/1-4DgJ7Sexs3gucjqKI7zVfP-wrutS0pC/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">⚖️</span>
+            <div>
+              <div class="card-title">Fallo — Excepción art. 320 CCyCN</div>
+              <div class="card-desc">Jurisprudencia sobre la excepción a la obligación de llevar contabilidad. Análisis del fallo.</div>
+              <span class="card-tag pdf">Jurisprudencia</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📄</span>Material de lectura</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/1B2mdOniKrxjmriwm0xYlZVjMqNKFlGVm/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Introducción a los estados financieros</div>
+              <div class="card-desc">Patrimonio, activo, pasivo, balance y estado de resultados. Principios contables básicos para abogados.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 5: PROPIEDAD INTELECTUAL -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div>
+          <div class="section-title">Derechos de Propiedad Intelectual</div>
+          <div class="section-subtitle">Marcas · Patentes · Modelos y diseños industriales</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://www.canva.com/design/DAGBc7UxvwM/Z26ayaEnpQnC32UMjE0dUg/view?utm_content=DAGBc7UxvwM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdf987e8075" target="_blank" class="card">
+            <span class="card-icon">™️</span>
+            <div>
+              <div class="card-title">Marcas</div>
+              <div class="card-desc">Ley 22.362. Concepto, registro, clases de marcas y acciones por infracción.</div>
+              <span class="card-tag ppt">Canva</span>
+            </div>
+          </a>
+          <a href="https://view.genially.com/660f756c2a0a440014a4813a/presentation-patentes-y-modelos-de-utilidad" target="_blank" class="card">
+            <span class="card-icon">⚙️</span>
+            <div>
+              <div class="card-title">Patentes y Modelos de Utilidad</div>
+              <div class="card-desc">Ley 24.481. Requisitos de patentabilidad, trámite y vigencia.</div>
+              <span class="card-tag ppt">Genially</span>
+            </div>
+          </a>
+          <a href="https://view.genially.com/660fb357607de500149523ba/dossier-reporting-modelos-y-disenos-industriales" target="_blank" class="card">
+            <span class="card-icon">🎨</span>
+            <div>
+              <div class="card-title">Modelos y Diseños Industriales</div>
+              <div class="card-desc">Dec.-Ley 6673/63. Registro, requisitos y protección del diseño industrial.</div>
+              <span class="card-tag ppt">Genially</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📖</span>Doctrina y bibliografía</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/17JMt1Yb0jgrcnwiggPxn-EmnUn7_gOwh/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Manual Otamendi — Marcas</div>
+              <div class="card-desc">Bibliografía de referencia obligatoria sobre derecho marcario argentino.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/file/d/13kreMLAuIOYL1sgMDy7Qlw-UnOj6KuGz/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Tratado Mitelman — Tomo 3</div>
+              <div class="card-desc">Bibliografía complementaria sobre patentes y propiedad industrial.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/file/d/17Vc_Yeov5GSPNvQF2p1ZZwuTIy5wzAAw/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Tratado Mitelman — Tomo 4</div>
+              <div class="card-desc">Bibliografía complementaria sobre propiedad industrial y modelos.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 6: MERCADO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <div>
+          <div class="section-title">Derecho del Mercado</div>
+          <div class="section-subtitle">Defensa de la competencia · Ley 27.442 · CNDC</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://docs.google.com/presentation/d/10F57HwdfE8LzQP62UcGKUNBKW8iQnrkl/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Mercado</div>
+              <div class="card-desc">Defensa de la competencia. Prácticas anticompetitivas y concentraciones económicas.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">⚖️</span>Jurisprudencia y dictámenes</div>
+        <div class="cards">
+          <a href="https://www.argentina.gob.ar/sites/default/files/2022/03/cond-1637-dictamen-reso.pdf" target="_blank" class="card">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Dictamen CNDC — Caso Molinos</div>
+              <div class="card-desc">Dictamen y resolución en el caso Molinos. Jurisprudencia administrativa de referencia.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📗</span>Normativa y recursos oficiales</div>
+        <div class="cards">
+          <a href="https://www.argentina.gob.ar/normativa/nacional/ley-27442-310241/texto" target="_blank" class="card">
+            <span class="card-icon">📗</span>
+            <div>
+              <div class="card-title">Ley 27.442 — Defensa de la Competencia</div>
+              <div class="card-desc">Texto completo de la ley vigente de defensa de la competencia.</div>
+              <span class="card-tag doc">Normativa</span>
+            </div>
+          </a>
+          <a href="https://www.argentina.gob.ar/defensadelacompetencia" target="_blank" class="card">
+            <span class="card-icon">🏛️</span>
+            <div>
+              <div class="card-title">CNDC — Comisión Nacional de Defensa de la Competencia</div>
+              <div class="card-desc">Página oficial. Dictámenes, resoluciones y normativa vigente.</div>
+              <span class="card-tag doc">Web oficial</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 7: SOCIEDADES -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">7</div>
+        <div>
+          <div class="section-title">Sociedades Comerciales</div>
+          <div class="section-subtitle">LGS 19.550 · Tipos societarios · Doctrina</div>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📊</span>Presentaciones</div>
+        <div class="cards">
+          <a href="https://docs.google.com/presentation/d/17iFBkdoFW7fPEHTcgg6vyv5rIw2DpoVK/edit?usp=sharing&ouid=107724204738921116978&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Sociedades — Parte 1</div>
+              <div class="card-desc">Concepto de sociedad, elementos esenciales, nulidades y clasificación.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/1daqVmmeabyl9kX-QXN9UBM5rlE8PdCGB/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Sociedades Típicas</div>
+              <div class="card-desc">SNC, SCS, SCA, SRL, SA. Régimen legal, órganos y responsabilidad.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/19Q0ytq-vUQYmEL4R49xHi17Fzw_4_Mux/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Sociedad Anónima</div>
+              <div class="card-desc">Constitución, capital, acciones, órganos y fiscalización de la SA.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/1jTTAs_ovKWbbdzGugcOH1LjTVnXO6SM8/edit?usp=sharing&ouid=108779643783230531258&rtpof=true&sd=true" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Sociedad de Responsabilidad Limitada</div>
+              <div class="card-desc">Régimen de la SRL. Cuotas, gerencia y régimen de responsabilidad.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/1PzaduS3NyyZtKKc0ZEquGICagVMoXo7YKUxu-9MdfIo/edit?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">Sociedades Sección IV</div>
+              <div class="card-desc">Sociedades no constituidas regularmente. Arts. 21-26 LGS. Régimen vigente.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/presentation/d/15xqR1I-pohdtADWFhu3Z60fUdN2q4oThJYmBjSXaHSE/edit?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📊</span>
+            <div>
+              <div class="card-title">SAS — Sociedad por Acciones Simplificada</div>
+              <div class="card-desc">Ley 27.349. Constitución, capital, órganos y régimen especial de la SAS.</div>
+              <span class="card-tag ppt">PowerPoint</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="type-group">
+        <div class="type-label"><span class="type-label-icon">📖</span>Doctrina y bibliografía</div>
+        <div class="cards">
+          <a href="https://drive.google.com/file/d/11hvxr3eDFM5096YwMrHDRZtq8Pb_Q0Zh/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📖</span>
+            <div>
+              <div class="card-title">Material bibliográfico de consulta</div>
+              <div class="card-desc">Bibliografía general de referencia para el estudio de derecho societario.</div>
+              <span class="card-tag pdf">PDF</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/file/d/1YmbYujgjNe3RoSTxrdLyjLWV2M-sAzX9/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Responsabilidad de la sociedad y los socios en la LGS</div>
+              <div class="card-desc">Artículo de doctrina sobre el régimen de responsabilidad en la Ley General de Sociedades.</div>
+              <span class="card-tag pdf">Doctrina</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/file/d/1O6KK1BDESUORstZoSfZkr35lE207dRpu/view?usp=sharing" target="_blank" class="card">
+            <span class="card-icon">📄</span>
+            <div>
+              <div class="card-title">Unipersonalidad sobreviniente — Errepar</div>
+              <div class="card-desc">Artículo sobre unipersonalidad sobreviniente en sociedades. Régimen y consecuencias jurídicas.</div>
+              <span class="card-tag pdf">Doctrina</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 8: NORMATIVA -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">8</div>
+        <div>
+          <div class="section-title">Normativa y recursos externos</div>
+          <div class="section-subtitle">Textos legales de referencia</div>
+        </div>
+      </div>
+      <div class="list-cards">
+        <a href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/235000-239999/235975/texact.htm" target="_blank" class="list-card">
+          <span class="list-card-icon">📗</span>
+          <span class="list-card-title">Código Civil y Comercial — CCyCN · InfoLEG</span>
+          <span class="list-card-tag">Normativa</span>
+        </a>
+        <a href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/0-4999/141/texact.htm" target="_blank" class="list-card">
+          <span class="list-card-icon">📗</span>
+          <span class="list-card-title">Ley 11.867 — Transferencia de Fondo de Comercio · InfoLEG</span>
+          <span class="list-card-tag">Normativa</span>
+        </a>
+        <a href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/25000-29999/26679/texact.htm" target="_blank" class="list-card">
+          <span class="list-card-icon">📗</span>
+          <span class="list-card-title">Ley General de Sociedades 19.550 · InfoLEG</span>
+          <span class="list-card-tag">Normativa</span>
+        </a>
+        <a href="https://www.infojus.gob.ar/" target="_blank" class="list-card">
+          <span class="list-card-icon">🔍</span>
+          <span class="list-card-title">InfoJUS — Sistema Argentino de Información Jurídica</span>
+          <span class="list-card-tag">Base de datos</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PARTE 2 ═══ -->
+<div id="parte2" class="page">
+  <div class="container">
+    <div class="coming-soon">
+      <div class="icon">📂</div>
+      <h2>Segunda Parte</h2>
+      <p>Los materiales de esta sección se irán agregando a medida que avance el cuatrimestre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PARTE 3 ═══ -->
+<div id="parte3" class="page">
+  <div class="container">
+    <div class="coming-soon">
+      <div class="icon">📂</div>
+      <h2>Tercera Parte</h2>
+      <p>Los materiales de esta sección se irán agregando a medida que avance el cuatrimestre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ EVALUACIONES ═══ -->
+<div id="evaluaciones" class="page">
+  <div class="container">
+
+    <div class="parte-banner">
+      <div class="parte-banner-num">★</div>
+      <div class="parte-banner-text">
+        <h2>Evaluaciones</h2>
+        <p>Fechas de parciales · Notas · Resoluciones de parcialitos</p>
+      </div>
+    </div>
+
+    <div class="eval-grid">
+
+      <!-- PARCIAL 1 -->
+      <div class="eval-card section">
+        <div class="eval-card-header">
+          <div>
+            <div class="title">1er Parcial</div>
+            <div class="subtitle">Comprende la Primera Parte</div>
+          </div>
+        </div>
+        <div class="eval-card-body">
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Fecha del parcial</div>
+              <div class="eval-row-meta">Temas: Parte 1 completa</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">A confirmar</span>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Publicación de notas</div>
+              <div class="eval-row-meta">Campus virtual</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Pendiente</span>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Modelo de parcial anterior</div>
+              <div class="eval-row-meta">Para práctica</div>
+            </div>
+            <div class="eval-row-right">
+              <a href="#" target="_blank" class="badge-link">Ver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARCIAL 2 -->
+      <div class="eval-card section">
+        <div class="eval-card-header">
+          <div>
+            <div class="title">2do Parcial</div>
+            <div class="subtitle">Comprende la Segunda y Tercera Parte</div>
+          </div>
+        </div>
+        <div class="eval-card-body">
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Fecha del parcial</div>
+              <div class="eval-row-meta">Temas: Partes 2 y 3</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">A confirmar</span>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Publicación de notas</div>
+              <div class="eval-row-meta">Campus virtual</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Pendiente</span>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Modelo de parcial anterior</div>
+              <div class="eval-row-meta">Para práctica</div>
+            </div>
+            <div class="eval-row-right">
+              <a href="#" target="_blank" class="badge-link">Ver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARCIALITOS -->
+      <div class="eval-card section" style="grid-column: 1 / -1;">
+        <div class="eval-card-header">
+          <div>
+            <div class="title">Parcialitos — Fechas y Resoluciones</div>
+            <div class="subtitle">Evaluaciones parciales con resolución detallada</div>
+          </div>
+        </div>
+        <div class="eval-card-body">
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Parcialito N° 1</div>
+              <div class="eval-row-meta">Temas: a confirmar</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Fecha a confirmar</span>
+              <a href="#" target="_blank" class="badge-link">Resolución</a>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Parcialito N° 2</div>
+              <div class="eval-row-meta">Temas: a confirmar</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Fecha a confirmar</span>
+              <a href="#" target="_blank" class="badge-link">Resolución</a>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Parcialito N° 3</div>
+              <div class="eval-row-meta">Temas: a confirmar</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Fecha a confirmar</span>
+              <a href="#" target="_blank" class="badge-link">Resolución</a>
+            </div>
+          </div>
+          <div class="eval-row">
+            <div>
+              <div class="eval-row-label">Parcialito N° 4</div>
+              <div class="eval-row-meta">Temas: a confirmar</div>
+            </div>
+            <div class="eval-row-right">
+              <span class="badge-pendiente">Fecha a confirmar</span>
+              <a href="#" target="_blank" class="badge-link">Resolución</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Elementos de Derecho Comercial · Cátedra Favier Dubois &amp; Araldi</strong><br>
+  UBA · Facultad de Derecho · Primer Cuatrimestre 2026
+</footer>
+
+<script>
+  function showPage(pageId, btn) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Deactivate all buttons
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    // Show selected page
+    document.getElementById(pageId).classList.add('active');
+    // Activate button
+    btn.classList.add('active');
+    // Scroll to top of content
+    window.scrollTo({ top: document.querySelector('nav').offsetTop, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
